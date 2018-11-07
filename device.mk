@@ -19,6 +19,8 @@
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
+PRODUCT_ENFORCE_RRO_TARGETS := *
+
 # Properties
 -include $(LOCAL_PATH)/prop.mk
 
