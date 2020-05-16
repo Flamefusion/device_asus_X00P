@@ -139,6 +139,7 @@ PRODUCT_PACKAGES += \
     libdisplayconfig \
     libqdMetaData.system \
     libtinyxml \
+    libvulkan \
     memtrack.msm8937
 
 PRODUCT_PACKAGES += \
