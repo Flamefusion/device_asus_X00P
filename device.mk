@@ -316,7 +316,6 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.2 \
     android.hardware.secure_element@1.0 \
     librmnetctl \
-    libcnefeatureconfig \
     libxml2 \
     qti-telephony-utils \
     qti_telephony_utils.xml \
@@ -367,7 +366,7 @@ PRODUCT_BOOT_JARS += \
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-impl \
-    android.hardware.thermal@2.0-service \
+    android.hardware.thermal@2.0-service
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
@@ -402,9 +401,7 @@ PRODUCT_COPY_FILES += \
 # WiFi
 PRODUCT_PACKAGES += \
     libwpa_client \
-    wcnss_service
-
-PRODUCT_PACKAGES += \
+    wcnss_service \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf
