@@ -40,6 +40,14 @@ if [ ! -f "$HELPER" ]; then
 fi
 source "${HELPER}"
 
+function blob_fixup() {
+    case "${1}" in
+    vendor/lib/libarcsoft_nighthawk.so|vendor/lib/libarcsoft_piczoom.so|vendor/lib/libarcsoft_videostab.so|vendor/lib/libarcsoft_night_shot.so)
+        patchelf --remove-needed "libandroid.so" "${2}"
+        ;;
+    esac
+}
+
 # Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
 
@@ -80,4 +88,4 @@ extract "${MY_DIR}"/proprietary-files.txt "${SRC}" \
 
 DEVICE_BLOB_ROOT="${LINEAGE_ROOT}"/vendor/"${VENDOR}"/"${DEVICE}"/proprietary
 
-"${MY_DIR}/setup-makefiles.sh"
+. "${MY_DIR}/setup-makefiles.sh"
