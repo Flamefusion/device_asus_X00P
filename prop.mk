@@ -16,8 +16,8 @@
 
 # ART
 PRODUCT_PROPERTY_OVERRIDES += \
-dalvik.vm.dex2oat-filter=speed \
-dalvik.vm.image-dex2oat-filter=speed
+    dalvik.vm.dex2oat-filter=speed \
+    dalvik.vm.image-dex2oat-filter=speed
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -60,7 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Boot
 PRODUCT_PROPERTY_OVERRIDES += \
-sys.vendor.shutdown.waittime=500
+    sys.vendor.shutdown.waittime=500
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -94,7 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Disable touch heatmap
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.input.video_enabled=false
+    ro.input.video_enabled=false
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -102,7 +102,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Fm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.fm.transmitter=false
+    ro.fm.transmitter=false \
+    vendor.hw.fm.init=0 \
+    ro.vendor.fm.use_audio_session=true
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -156,8 +158,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Qualcomm
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.vendor.qti.va_aosp.support=1 \
-ro.vendor.qti.va_odm.support=1
+    ro.vendor.qti.va_aosp.support=1 \
+    ro.vendor.qti.va_odm.support=1
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
