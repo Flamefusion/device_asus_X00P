@@ -2,13 +2,13 @@
   {
     "repository":  "kernel_asus_X00P",
     "target_path": "kernel/asus/X00P",
-    "branch": "ten"
+    "branch": "ten-wip"
   },
   {
-    "repository":  "vendor_asus_x00p",
+    "repository":  "danascape/vendor_asus_X00P",
     "target_path": "vendor/asus/X00P",
-    "branch": "ten",
-    "remote": "pixel-devices-bitbucket"
+    "branch": "ten-wip",
+    "remote": "github"
   },
   {
     "remote":     "github",
