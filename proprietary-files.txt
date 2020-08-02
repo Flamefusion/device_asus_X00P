@@ -1718,3 +1718,22 @@ vendor/firmware/a630_gmu.bin
 vendor/firmware/a630_sqe.fw
 vendor/firmware/leia_pfp_470.fw
 vendor/firmware/leia_pm4_470.fw
+
+# Touchscreen
+vendor/bin/hbtp_daemon
+vendor/etc/hbtp/hbtpcfg.dat
+vendor/etc/hbtp/hbtpcfg2.dat
+vendor/etc/hbtp/hbtpcfg_8917.dat
+vendor/etc/hbtp/hbtpcfg_adsp_800s_fhd.dat
+vendor/etc/hbtp/hbtpcfg_msm8937_800s_fhd.dat
+vendor/etc/hbtp/hbtpcfg_sdm450_801s_fhdp.dat
+vendor/etc/hbtp/loader.cfg
+vendor/etc/hbtp/qtc800h.bin
+vendor/etc/hbtp/qtc800s_dsp.bin
+vendor/etc/hbtp/qtc801s_450.bin
+vendor/lib/libhbtpclient.so
+vendor/lib/libhbtpdsp.so
+vendor/lib/libhbtpfrmwk.so
+vendor/lib64/libhbtpclient.so
+vendor/lib64/libhbtpdsp.so
+vendor/lib64/libhbtpfrmwk.so
