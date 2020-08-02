@@ -49,7 +49,10 @@ on early-boot
     setrlimit 8 67108864 67108864
     # Allow subsystem (modem etc) debugging
     write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
+    write /sys/devices/virtual/npu/msm_npu/boot 1
     write /sys/kernel/boot_slpi/boot 1
+    write /sys/devices/virtual/cvp/cvp/boot 1
 
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
@@ -59,6 +62,7 @@ on early-boot
     chown system system /persist/sensors/registry/registry
     chown system system /persist/sensors/registry/registry/sensors_registry
     chown system system /persist/sensors/sensors_settings
+    chown system system /persist/sensors/registry/sns_reg_version
     chown system system /persist/sensors/registry/config
     chmod 0664 /persist/sensors/sensors_settings
 
@@ -100,8 +104,6 @@ on boot
     chown system system /sys/kernel/boot_adsp/ssr
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/module/radio_iris_transport/parameters/fmsmd_set
-    chown system system /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/enable_dt2w
-    chmod 0664 /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/enable_dt2w
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -114,9 +116,9 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
-    mkdir /mnt/vendor/persist/bluetooth 0770 bluetooth bluetooth
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
     mkdir /persist/misc 0770 system system
-    mkdir /mnt/vendor/persist/alarm 0770 system system
+    mkdir /persist/alarm 0770 system system
     mkdir /mnt/vendor/persist/time 0770 system system
     mkdir /mnt/vendor/persist/secnvm 0770 system system
     restorecon_recursive /mnt/vendor/persist
@@ -143,8 +145,56 @@ on boot
 
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
+    # Allow access to emmc rawdump block partition and dload sysfs node
+    chown root system /dev/block/bootdevice/by-name/rawdump
+    chmod 0660 /dev/block/bootdevice/by-name/rawdump
+    chown root system /sys/kernel/dload/emmc_dload
+    chmod 0660 /sys/kernel/dload/emmc_dload
+    chown root system /dev/block/bootdevice/by-name/ramdump
+    chmod 0660 /dev/block/bootdevice/by-name/ramdump
+    chown root system /sys/kernel/dload/dload_mode
+    chmod 0660 /sys/kernel/dload/dload_mode
+
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/class/backlight/panel0-backlight/max_brightness
+    chown system system /sys/class/backlight/panel1-backlight/brightness
+    chown system system /sys/class/backlight/panel1-backlight/max_brightness
+
+    # Allow access to sensors device attributes
+    chown system system /sys/class/sensors/MPU6050-accel/enable
+    chown system system /sys/class/sensors/MPU6050-accel/poll_delay
+    chown system system /sys/class/sensors/MPU6050-gyro/enable
+    chown system system /sys/class/sensors/MPU6050-gyro/poll_delay
+    chown system system /sys/class/sensors/apds9930-light/enable
+    chown system system /sys/class/sensors/apds9930-light/poll_delay
+    chown system system /sys/class/sensors/apds9930-proximity/enable
+    chown system system /sys/class/sensors/apds9930-proximity/poll_delay
+
+    # Create directory used for display
+    # for backward compatibility
+    mkdir /persist/display 0770 system graphics
+    mkdir /mnt/vendor/persist/display 0770 system graphics
+
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
+
+    # access permission for secure touch
+    chmod 0660 /sys/devices/soc.0/78b7000.i2c/i2c-3/3-0020/input/input0/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b7000.i2c/i2c-3/3-0020/input/input0/secure_touch
+    chmod 0660 /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch_enable
+    chmod 0440 /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b7000.i2c/i2c-3/3-0020/input/input0/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b7000.i2c/i2c-3/3-0020/input/input0/secure_touch
+    chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch_enable
+    chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch
+    chown system system /sys/kernel/hbtp/display_pwr
+
+    # USB controller configuration
+    setprop vendor.usb.rndis.func.name "rndis"
+    setprop vendor.usb.rmnet.func.name "rmnet_bam"
+    setprop vendor.usb.rmnet.inst.name "rmnet_bam_dmux"
+    setprop vendor.usb.dpl.inst.name "dpl_bam_dmux"
+    setprop vendor.usb.qdss.inst.name "qdss"
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -194,7 +244,21 @@ on post-fs-data
     # Create directory for modem_config
     mkdir /data/vendor/modem_config 0570 radio root
 
+    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
+    # We chown/chmod /persist again so because mount is run as root + defaults
+    chown root system /persist
+    chmod 0771 /persist
     chown system system /persist/WCNSS_qcom_wlan_nv.bin
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
+
+    # Chown polling nodes as needed from UI running on system server
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/msm_sdcc.4/polling
 
     #Create directories for Location services
     mkdir /data/vendor/location 0770 gps gps
@@ -349,7 +413,7 @@ service loc_launcher /vendor/bin/loc_launcher
 
 service qcom-sh /vendor/bin/init.qcom.sh
     class late_start
-    user system
+    user root
     group root system radio
     oneshot
 
@@ -385,7 +449,7 @@ service vendor.ril-daemon3 /vendor/bin/hw/rild -c 3
     
 service charger /system/bin/charger
     class charger
-    user system
+    user root
     group system graphics input
     capabilities SYS_BOOT
     seclabel u:r:charger:s0
