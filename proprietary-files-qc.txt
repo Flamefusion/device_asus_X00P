@@ -555,6 +555,22 @@ vendor/lib64/libqmi_common_so.so|0d9e6278cad9eb090088593bb4ef0f370dda2899
 vendor/lib64/libqmi_csi.so|441dec78400fa88c2567942ebc8242aaa69bb7c9
 vendor/lib64/libqmi_encdec.so|5416811fb81494e36be88ead0393c43daa5cb2fc
 
+# QTI Performance libs - from X00P - QKQ1.191002.002-17.00.2003.23-20200401
+-framework/QPerformance.jar|557d4bb4e6009190a9a9df65c4c1fb0c37c2730a
+-framework/UxPerformance.jar|13c626f1a42fc084b64447460417afa1091f0c0f
+bin/perfservice|388f380f2c4f84d3b83510fe9a25e716baf94eef
+etc/init/perfservice.rc|81b7d732069783873184c4f51710236ee6139e49
+lib/libqti-at.so|a697bf4a257021b9d507b61b91c11a1221fb2284
+lib/libqti-perfd-client_system.so|c021b1c1065161a15c2202747ef6738e89cd1b7b
+lib/libqti-iopd-client_system.so|1a36a807a75dde4bcfed713924aca675f5c11558
+lib/libqti-util_system.so|3df0aa4365a085ab64ff1ae226bf724d0815aa25
+lib/libqti_performance.so|2a9f885d001661a1a5b8543c4d592afef34f7662
+lib64/libqti-at.so|c078ca9c7b36f4f6628e451487a0704b5694e658
+lib64/libqti-perfd-client_system.so|4390474d5549c02f53911243c972968244f29391
+lib64/libqti-iopd-client_system.so|661639804da84141fd783fd9dfc90394de8febf7
+lib64/libqti-util_system.so|c3717d35a42c9d38e2ba18dac6756e3e9845d84f
+lib64/libqti_performance.so|2a6bfefe6eb7a68f0774774f5de7f363885c3d87
+
 # Radio - from X00P - QKQ1.191002.002 17.00.2003.23-20200401
 -product/app/datastatusnotification/datastatusnotification.apk|fc267dd7866a0ab560e164af9c87c9dc8c258284
 -product/app/embms/embms.apk|79360e7c0a6cb312a10ae931da40d00529da6d13
