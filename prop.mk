@@ -99,7 +99,7 @@ ro.input.video_enabled=false
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
+    ro.control_privapp_permissions=log
 
 # Fm
 PRODUCT_PROPERTY_OVERRIDES += \
