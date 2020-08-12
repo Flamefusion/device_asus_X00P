@@ -626,4 +626,15 @@
           specified name exists on the device, autofill will be disabled by default.
     -->
     <string name="config_defaultAutofillService" translatable="false">com.google.android.gms/.autofill.service.AutofillService</string>
+    
+    <!-- Whether device supports variable refresh rate -->
+    <bool name="config_hasVariableRefreshRate">true</bool>
+    <!-- Default setting for refresh rate
+    0 = Auto
+    1 = 60HZ
+    2 = 90Hz -->
+<integer name="config_defaultVariableRefreshRateSetting">1</integer>
+
+	
 </resources>
+
