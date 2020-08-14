@@ -115,9 +115,9 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-imp \
     android.hardware.biometrics.fingerprint@2.1-service
 
-# Camera
+# GoogleCamera
 PRODUCT_PACKAGES += \
-    Gcam
+   GoogleCamera
 
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
