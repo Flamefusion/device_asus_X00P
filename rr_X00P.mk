@@ -33,6 +33,9 @@ $(call inherit-product, $(DEVICE_PATH)/device.mk)
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORT := true
 
+# OFFICIAL
+RR_BUILDTYPE := Official
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := X00P
 PRODUCT_NAME := rr_X00P
