@@ -647,6 +647,12 @@
     2 = 90Hz -->
 <integer name="config_defaultVariableRefreshRateSetting">1</integer>
 
-	
-</resources>
+   <!-- Does the notification LED support multiple colors?
+    Used to decide if the user can change the colors -->
+    <bool name="config_multiColorNotificationLed">true</bool> 
 
+    <!-- Does the battery LED support multiple colors. Used 
+    to decide if the user can change the colors -->
+    <bool name="config_multiColorBatteryLed">true</bool>
+
+</resources>
